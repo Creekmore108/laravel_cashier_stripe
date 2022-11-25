@@ -22,6 +22,23 @@ class HomeController extends Controller
 
     public function singleCharge(Request $request)
     {
-            return $request;
+
+            $amount = $request->amount;
+            $amount = $amount * 100;
+            $paymentMethod = $request->payment_method;
+
+            $user = auth()->user();
+        
+            $user->createOrGetStripeCustomer();
+            
+            $paymentMethod = $user->addPaymentMethod($paymentMethod);
+            
+            // if ($paymentMethod != null) {
+            //     $paymentMethod = $user->addPaymentMethod($paymentMethod);
+            // }
+
+            $user->charge($amount, $paymentMethod->id);
+
+            return to_route('dashboard');
     }
 }

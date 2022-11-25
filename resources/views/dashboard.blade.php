@@ -1,5 +1,5 @@
 <x-app-layout>
-@section('styles')
+<script src="https://js.stripe.com/v3/"></script>
 <style>
     .StripeElement {
         background-color: white;
@@ -20,7 +20,6 @@
         background-color: #fefde5 !important;
     }
 </style>
-@endsection
 
 <div class="container">
     <div class="row justify-content-center">
@@ -66,9 +65,6 @@
     </div>
 </div>
 
-
-@section('scripts')
-<script src="https://js.stripe.com/v3/"></script>
 <script>
     var stripe = Stripe('{{ env('STRIPE_KEY') }}');
     var elements = stripe.elements();
@@ -87,7 +83,7 @@
             iconColor: '#fa755a'
         }
     };
-    var card = elements.create('card', {hidePostalCode: true,
+    var card = elements.create('card', { hidePostalCode: true,
         style: style});
     card.mount('#card-element');
     card.addEventListener('change', function(event) {
@@ -129,5 +125,5 @@
         form.submit();
     }
 </script>
-@endsection
+
 </x-app-layout>
