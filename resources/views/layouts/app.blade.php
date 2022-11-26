@@ -14,6 +14,10 @@
     
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @yield('styles')
+
+        <!-- Tailwind CSS -->
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="/dist/output.css" rel="stylesheet">
     
     </head>
     <body class="font-sans antialiased">

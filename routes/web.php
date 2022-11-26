@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/plans', function () {
+    return view('plans');
+})->name('plans');
+
+Route::get('/subscription', function () {
+    return view('subscription');
+})->name('subscription');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

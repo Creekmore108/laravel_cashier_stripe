@@ -1,129 +1,62 @@
 <x-app-layout>
-<script src="https://js.stripe.com/v3/"></script>
-<style>
-    .StripeElement {
-        background-color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        border: 1px solid transparent;
-        box-shadow: 0 1px 3px 0 #e6ebf1;
-        -webkit-transition: box-shadow 150ms ease;
-        transition: box-shadow 150ms ease;
-    }
-    .StripeElement--focus {
-        box-shadow: 0 1px 3px 0 #cfd7df;
-    }
-    .StripeElement--invalid {
-        border-color: #fa755a;
-    }
-    .StripeElement--webkit-autofill {
-        background-color: #fefde5 !important;
-    }
-</style>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('New Charge') }}</div>
-
                 <div class="card-body border border-2 ml-5">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                <main>
+                    <!-- Hero section -->
+                    <div class="relative pt-2">
+                    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
+                    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <div class="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
+                        <div class="absolute inset-0">
+                            <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="People working on laptops">
+                            <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 mix-blend-multiply"></div>
                         </div>
-                    @endif
-
-                    <form action="{{ route('single.charge') }}" method="POST" id="subscribe-form">
-                        <label for="amount" form-control>Amount</label> <br>
-                        <input type="number" name="amount" id="amount" class="form-control"> <br>
-                        <label for="card-holder-name" form-control>Card Holder Name</label> <br>
-                        <input id="card-holder-name" type="text" class="form-control">
-                        @csrf
-                        <div class="form-row">
-                            <label for="card-element">Credit or debit card</label>
-                            <div id="card-element" class="form-control">
+                        <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+                            <h1 class="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                            <span class="block text-white">Take control of your</span>
+                            <span class="block text-indigo-200">customer support</span>
+                            </h1>
+                            <p class="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                            <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+                            <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
+                                <a href="{{ route('plans') }}" class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8">Get started</a>
+                                <a href="{{ route('plans') }}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8">Live demo</a>
                             </div>
-                            <!-- Used to display form errors. -->
-                            <div id="card-errors" role="alert"></div>
+                            </div>
                         </div>
-                        <div class="stripe-errors"></div>
-                        @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                            {{ $error }}<br>
-                            @endforeach
                         </div>
-                        @endif
-                        <div class="form-group text-center">
-                            <button  id="card-button" data-secret="{{ $intent->client_secret }}" class="btn btn-lg btn-success btn-block">SUBMIT</button>
+                    </div>
+                    </div>
+
+                    <!-- Logo Cloud -->
+                    <div class="bg-gray-100">
+                    <div class="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
+                        <p class="text-center text-base font-semibold text-gray-500">Trusted by 5 Fortune 500 Businesses</p>
+                        <div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
+                        <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                            <img class="h-12" src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg" alt="Tuple">
                         </div>
-                    </form>
+                        <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                            <img class="h-12" src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg" alt="Mirage">
+                        </div>
+                        <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
+                            <img class="h-12" src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg" alt="StaticKit">
+                        </div>
+                        <div class="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
+                            <img class="h-12" src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg" alt="Transistor">
+                        </div>
+                        <div class="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
+                            <img class="h-12" src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg" alt="Workcation">
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    var stripe = Stripe('{{ env('STRIPE_KEY') }}');
-    var elements = stripe.elements();
-    var style = {
-        base: {
-            color: '#32325d',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-                color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
-    };
-    var card = elements.create('card', { hidePostalCode: true,
-        style: style});
-    card.mount('#card-element');
-    card.addEventListener('change', function(event) {
-        var displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
-    });
-    const cardHolderName = document.getElementById('card-holder-name');
-    const cardButton = document.getElementById('card-button');
-    const clientSecret = cardButton.dataset.secret;
-    cardButton.addEventListener('click', async (e) => {
-        e.preventDefault();
-        console.log("attempting");
-        const { setupIntent, error } = await stripe.confirmCardSetup(
-            clientSecret, {
-                payment_method: {
-                    card: card,
-                    billing_details: { name: cardHolderName.value }
-                }
-            }
-            );
-        if (error) {
-            var errorElement = document.getElementById('card-errors');
-            errorElement.textContent = error.message;
-        } else {
-            paymentMethodHandler(setupIntent.payment_method);
-        }
-    });
-    function paymentMethodHandler(payment_method) {
-        var form = document.getElementById('subscribe-form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'payment_method');
-        hiddenInput.setAttribute('value', payment_method);
-        form.appendChild(hiddenInput);
-        form.submit();
-    }
-</script>
-
 </x-app-layout>
