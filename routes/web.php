@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PlansController;
+use App\Http\Controllers\ShowPlansController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,16 +21,16 @@ use App\Http\Controllers\SubscriptionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
-
-Route::get('/showplans', function () {
-    return view('showplans');
-})->name('showplans');
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription');
+    Route::get('/checkout/{planId}', [SubscriptionController::class, 'checkout'])->name('subCheckout');
+    Route::post('/process', [SubscriptionController::class, 'process'])->name('process');
+
+    Route::get('/showplans', [ShowPlansController::class, 'index'])->name('showplans');
 
     Route::get('/addplan', [PlansController::class, 'index'])->name('addplan');
     Route::post('/storeplan', [PlansController::class, 'storePlan'])->name('storeplan');
@@ -38,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 Route::post('single-charge', [HomeController::class, 'singleCharge'])->name('single.charge');

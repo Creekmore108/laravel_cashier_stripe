@@ -11,7 +11,7 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+            <a href="{{ route('register') }}" >Create an account</a>
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />

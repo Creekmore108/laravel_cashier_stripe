@@ -11,7 +11,15 @@
           <button type="button" class="relative ml-0.5 w-1/2 whitespace-nowrap rounded-md border border-transparent py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-2 focus:ring-purple-500 sm:w-auto sm:px-8">Yearly billing</button>
         </div>
       </div>
-      <div class="mt-12 space-y-4 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
+      @if(count($errors) > 0)
+    <div class=" text-red-700 text-xl underline">
+      @foreach($errors->all() as $error)
+        {{ $error }} 
+      @endforeach
+    </div>
+    @endif
+    <br>
+      <div class="mt-10 space-y-4 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
         <div class="divide-y divide-gray-200 rounded-lg border border-gray-200 shadow-sm">
           <div class="p-6">
             <h2 class="text-lg font-medium leading-6 text-gray-900">Bronze</h2>
@@ -20,7 +28,7 @@
               <span class="text-4xl font-bold tracking-tight text-gray-900">$25</span>
               <span class="text-base font-medium text-gray-500">/mo</span>
             </p>
-            <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Bronze Plan</a>
+            <a href="{{ route('subCheckout', $bronze->plan_id) }}" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Bronze Plan</a>
           </div>
           <div class="px-6 pt-6 pb-8">
             <h3 class="text-sm font-medium text-gray-900">What's included</h3>
@@ -52,7 +60,7 @@
               <span class="text-4xl font-bold tracking-tight text-gray-900">$35</span>
               <span class="text-base font-medium text-gray-500">/mo</span>
             </p>
-            <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Silver Plan</a>
+            <a href="{{ route('subCheckout', $silver->plan_id) }}" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Silver Plan</a>
           </div>
           <div class="px-6 pt-6 pb-8">
             <h3 class="text-sm font-medium text-gray-900">What's included</h3>
@@ -92,7 +100,7 @@
               <span class="text-4xl font-bold tracking-tight text-gray-900">$45</span>
               <span class="text-base font-medium text-gray-500">/mo</span>
             </p>
-            <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Gold Plan</a>
+            <a href="{{ route('subCheckout', $gold->plan_id) }}" class="mt-8 block w-full rounded-md border border-transparent bg-purple-600 py-2 text-center text-sm font-semibold text-white hover:bg-purple-700">Buy Gold Plan</a>
           </div>
           <div class="px-6 pt-6 pb-8">
             <h3 class="text-sm font-medium text-gray-900">What's included</h3>
@@ -135,6 +143,7 @@
        
       </div>
     </div>
+    
 
     <!-- Feature list -->
     <div class="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
