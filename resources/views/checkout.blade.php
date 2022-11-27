@@ -20,8 +20,9 @@
         background-color: #fefde5 !important;
     }
 </style>
-<div class="container">
-<div class="w-1/2">
+<h1 class="text-4xl font-bold tracking-tight pt-8 text-gray-900 sm:text-center">Single Payment Checkout</h1>
+<div class="flex items-center justify-center p-10">
+  <div class="w-full max-w-md border bg-white p-5 rounded-lg" >
     <form class="flex flex-wrap gap-3 w-full p-5" action="{{ route('single.charge') }}" method="POST" id="subscribe-form">
     @csrf
     <label class="relative w-full flex flex-col">
@@ -37,9 +38,14 @@
         <div id="card-element" class="form-control">
     </label>
     </div>
-        <div class="form-group ml-60">
+        <!-- <div class="form-group ml-60">
             <button  id="card-button" data-secret="{{ $intent->client_secret }}" class="button bg-green-400 py-2 px-4 rounded-xl mt-4">SUBMIT</button>
-        </div>
+        </div> -->
+        <button
+            id="card-button" data-secret="{{ $intent->client_secret }}" 
+            class="hover:shadow-form rounded-md bg-blue-500 py-3 px-8 mt-6 text-center text-base font-semibold text-white outline-none">
+          Submit
+        </button>
     </form>
 </div>
 </div>

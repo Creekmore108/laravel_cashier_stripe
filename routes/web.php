@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PlansController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +22,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/plans', function () {
-    return view('plans');
-})->name('plans');
-
-Route::get('/subscription', function () {
-    return view('subscription');
-})->name('subscription');
+Route::get('/showplans', function () {
+    return view('showplans');
+})->name('showplans');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription');
+
+    Route::get('/addplan', [PlansController::class, 'index'])->name('addplan');
+    Route::post('/storeplan', [PlansController::class, 'storePlan'])->name('storeplan');
+
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
